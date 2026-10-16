@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emma & Michael's wedding website — view the love story, event schedule, RSVP, registry, and FAQ.">
+    <meta name="theme-color" content="#688268">
+    <title>Elegance & Forever | Our Wedding</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display, Great Vibes, & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        cursive: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        sage: {
+                            50: '#f4f7f4',
+                            100: '#e3eae3',
+                            600: '#688268',
+                            700: '#526852',
+                            800: '#435443',
+                        },
+                        blush: {
+                            50: '#fdf8f8',
+                            100: '#f9ecec',
+                            200: '#f3d9d9',
+                            500: '#d98880',
+                        },
+                        gold: {
+                            300: '#ebd8a3',
+                            400: '#e5cd89',
+                            500: '#d4af37',
+                            600: '#aa8c2c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Theme Variables */
+        :root {
+            --primary-color: #688268;
+            --primary-hover: #526852;
+            --accent-color: #d4af37;
+            --bg-light: #faf8f5;
+        }
+
+        .bg-custom-primary { background-color: var(--primary-color); }
+        .text-custom-primary { color: var(--primary-color); }
+        .border-custom-primary { border-color: var(--primary-color); }
+        .hover-bg-custom-primary:hover { background-color: var(--primary-hover); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-[#FAF8F5] antialiased">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Monogram Logo -->
+                <a href="#hero" class="font-cursive text-3xl sm:text-4xl text-custom-primary hover:opacity-80 transition duration-300 tracking-wider" id="navLogo">
+                    E & M
+                </a>
+                
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex space-x-8 font-medium text-xs tracking-widest uppercase text-gray-700">
+                    <a href="#story" class="hover:text-custom-primary transition">Our Story</a>
+                    <a href="#schedule" class="hover:text-custom-primary transition">Schedule</a>
+                    <a href="#gallery" class="hover:text-custom-primary transition">Gallery</a>
+                    <a href="#rsvp" class="hover:text-custom-primary transition">RSVP</a>
+                    <a href="#registry" class="hover:text-custom-primary transition">Registry</a>
+                    <a href="#faq" class="hover:text-custom-primary transition">Q&A</a>
+                </div>
+
+                <!-- Customization Action Button -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openCustomizer()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-gold-500/10 text-gold-600 border border-gold-400/40 hover:bg-gold-500 hover:text-white transition-all duration-300 shadow-sm" title="Customize Website Details">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Customize
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Open navigation menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3 font-medium text-sm text-center uppercase tracking-wider">
+            <a href="#story" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">Our Story</a>
+            <a href="#schedule" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">Schedule</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">Gallery</a>
+            <a href="#rsvp" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">RSVP</a>
+            <a href="#registry" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">Registry</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 hover:text-custom-primary">Q&A</a>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div id="heroBg" class="absolute inset-0 bg-cover bg-center transition-all duration-700 scale-105" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80');">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <!-- Hero Content Box -->
+        <div class="relative z-10 max-w-4xl mx-auto text-center text-white px-4 py-12 flex flex-col items-center">
+            <p class="font-sans text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 text-gold-300 font-semibold drop-shadow">We Are Getting Married</p>
+            <h1 id="displayCoupleNames" class="font-serif text-5xl sm:text-7xl lg:text-8xl mb-6 tracking-wide drop-shadow-md italic">
+                Emma & Michael
+            </h1>
+            <p id="displayVenue" class="font-sans text-base sm:text-xl font-light tracking-widest uppercase mb-10 text-gray-200">
+                June 18, 2027 • Grand Bahama Island, Freeport
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-4 gap-3 sm:gap-6 w-full max-w-lg mb-12">
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center text-gray-900 shadow-xl">
+                    <span id="timerDays" class="block font-serif text-2xl sm:text-4xl font-bold text-custom-primary">00</span>
+                    <span class="text-[10px] sm:text-xs tracking-widest uppercase text-gray-500 font-medium">Days</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center text-gray-900 shadow-xl">
+                    <span id="timerHours" class="block font-serif text-2xl sm:text-4xl font-bold text-custom-primary">00</span>
+                    <span class="text-[10px] sm:text-xs tracking-widest uppercase text-gray-500 font-medium">Hours</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center text-gray-900 shadow-xl">
+                    <span id="timerMinutes" class="block font-serif text-2xl sm:text-4xl font-bold text-custom-primary">00</span>
+                    <span class="text-[10px] sm:text-xs tracking-widest uppercase text-gray-500 font-medium">Mins</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center text-gray-900 shadow-xl">
+                    <span id="timerSeconds" class="block font-serif text-2xl sm:text-4xl font-bold text-custom-primary">00</span>
+                    <span class="text-[10px] sm:text-xs tracking-widest uppercase text-gray-500 font-medium">Secs</span>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <a href="#rsvp" class="px-8 py-3.5 bg-custom-primary hover-bg-custom-primary text-white rounded-full font-medium text-sm tracking-widest uppercase transition duration-300 shadow-lg hover:shadow-xl text-center">
+                    RSVP Now
+                </a>
+                <a href="#story" class="px-8 py-3.5 bg-white/20 hover:bg-white/30 text-white rounded-full font-medium text-sm tracking-widest uppercase border border-white/40 backdrop-blur-sm transition duration-300 text-center">
+                    Our Story
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white text-center animate-bounce">
+            <a href="#story" aria-label="Scroll Down">
+                <i class="fa-solid fa-angle-down text-2xl opacity-75"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2. Our Story Section -->
+    <section id="story" class="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">How It Started</p>
+            <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">Our Love Story</h2>
+            <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+        </div>
+
+        <!-- Narrative Timeline -->
+        <div class="relative border-l-2 border-gray-200 ml-4 md:ml-0 md:left-1/2 md:-translate-x-1/2 space-y-12">
+            
+            <!-- Timeline Item 1 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-custom-primary text-white font-serif absolute -left-5 md:left-1/2 md:-translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-coffee text-sm"></i>
+                </div>
+                <div class="ml-8 md:ml-0 md:w-1/2 md:pr-12 text-left md:text-right">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-gold-600">October 2021</span>
+                        <h3 class="font-serif text-xl text-gray-900 mt-1 mb-2">First Coffee & Instant Connection</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            We bumped into each other at a cozy seaside café. What was planned as a brief 20-minute coffee turned into three hours of endless conversation, laughter, and shared dreams.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-custom-primary text-white font-serif absolute -left-5 md:left-1/2 md:-translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-plane text-sm"></i>
+                </div>
+                <div class="ml-8 md:ml-0 md:w-1/2 md:pl-12 md:ml-auto text-left">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-gold-600">August 2023</span>
+                        <h3 class="font-serif text-xl text-gray-900 mt-1 mb-2">Island Getaways & Adventures</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Traveling together solidified everything. From exploring turquoise coastlines to tasting local delicacies, we knew we were life partners meant to navigate the world together.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-custom-primary text-white font-serif absolute -left-5 md:left-1/2 md:-translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-ring text-sm"></i>
+                </div>
+                <div class="ml-8 md:ml-0 md:w-1/2 md:pr-12 text-left md:text-right">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-gold-600">December 2025</span>
+                        <h3 class="font-serif text-xl text-gray-900 mt-1 mb-2">The Sunset Proposal</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Under a golden sunset along the beach, Michael got down on one knee. Surrounding by waves and gentle breeze, the answer was an immediate, overjoyed YES!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. Event Schedule & Location -->
+    <section id="schedule" class="py-24 bg-sage-50/50 px-4 sm:px-6 lg:px-8 border-y border-sage-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">Join Us</p>
+                <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">Event Schedule</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Event Timeline Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-white p-8 rounded-2xl text-center shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-custom-primary mb-4 text-xl">
+                        <i class="fa-solid fa-church"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-gold-600 uppercase tracking-widest">4:00 PM - 5:00 PM</span>
+                    <h3 class="font-serif text-xl text-gray-900 my-2">The Ceremony</h3>
+                    <p class="text-gray-500 text-xs mb-3">Seaside Gazebo Grounds</p>
+                    <p class="text-gray-600 text-sm">Exchange of vows surrounded by love, family, and ocean breeze.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl text-center shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-custom-primary mb-4 text-xl">
+                        <i class="fa-solid fa-martini-glass-citrus"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-gold-600 uppercase tracking-widest">5:00 PM - 6:30 PM</span>
+                    <h3 class="font-serif text-xl text-gray-900 my-2">Cocktail Hour</h3>
+                    <p class="text-gray-500 text-xs mb-3">Sunset Lawn</p>
+                    <p class="text-gray-600 text-sm">Artisanal cocktails, tropical appetizers, and acoustic live music.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl text-center shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-custom-primary mb-4 text-xl">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-gold-600 uppercase tracking-widest">6:30 PM - 9:30 PM</span>
+                    <h3 class="font-serif text-xl text-gray-900 my-2">Dinner & Toast</h3>
+                    <p class="text-gray-500 text-xs mb-3">Grand Ballroom</p>
+                    <p class="text-gray-600 text-sm">Gourmet three-course dinner, touching speeches, and champagne toasts.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl text-center shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-custom-primary mb-4 text-xl">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-gold-600 uppercase tracking-widest">9:30 PM - LATE</span>
+                    <h3 class="font-serif text-xl text-gray-900 my-2">After Party</h3>
+                    <p class="text-gray-500 text-xs mb-3">Main Stage Pavilion</p>
+                    <p class="text-gray-600 text-sm">Live DJ beats, late-night snacks, and celebrating on the dance floor.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gold-600">Venue & Travel</span>
+                    <h3 id="displayVenueDetailTitle" class="font-serif text-3xl text-gray-900 mt-2 mb-4"><a href="https://maps.google.com/?cid=3218568944219575116&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" rel="noopener noreferrer" class="hover:underline">Bahamas Beach Weddings Venue</a></h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Nestled along the pristine coastal shores of Grand Bahama, our venue offers panoramic ocean views, lush floral pathways, and luxury guest accommodations.
+                    </p>
+                    <div class="space-y-3 text-sm text-gray-700 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-custom-primary"></i>
+                            <span id="displayAddress">8 Merport Building, Freeport, Grand Bahama Island</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-square-parking text-custom-primary"></i>
+                            <span>Complimentary valet parking provided for all attendees.</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-bus text-custom-primary"></i>
+                            <span>Continuous shuttle bus running from partner island hotels.</span>
+                        </div>
+                    </div>
+                    <a id="displayDirectionsBtn" href="https://maps.google.com/?cid=3218568944219575116&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full text-xs font-semibold tracking-widest uppercase transition">
+                        <i class="fa-solid fa-map-location-dot"></i> Get Directions
+                    </a>
+                </div>
+
+                <div class="relative w-full h-80 rounded-2xl overflow-hidden bg-gray-200 shadow-inner flex items-center justify-center">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Venue Beach Location" class="absolute inset-0 w-full h-full object-cover filter brightness-90">
+                    <div class="relative z-10 text-center p-6 bg-white/90 backdrop-blur-md rounded-2xl max-w-xs shadow-lg">
+                        <i class="fa-solid fa-map-pin text-3xl text-custom-primary mb-2"></i>
+                        <h4 class="font-serif font-bold text-gray-900">Bahamas Beach Weddings</h4>
+                        <p class="text-xs text-gray-500 mt-1">Freeport, Grand Bahama Island</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. RSVP Form Section -->
+    <section id="rsvp" class="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">Be Our Guest</p>
+            <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">RSVP</h2>
+            <p class="text-gray-500 text-sm mt-2">Kindly respond by May 1st, 2027</p>
+            <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+        </div>
+
+        <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100">
+            <form id="rsvpForm" name="rsvp" method="POST" data-netlify="true" onsubmit="handleRSVPSubmit(event)" class="space-y-6">
+                <input type="hidden" name="form-name" value="rsvp">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="guestName">Your Full Name *</label>
+                        <input type="text" id="guestName" name="name" required placeholder="e.g. Eleanor Vance" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-600/50 text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="guestEmail">Email Address *</label>
+                        <input type="email" id="guestEmail" name="email" required placeholder="eleanor@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-600/50 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Will You Attend? *</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-sage-600 transition bg-gray-50/50">
+                            <input type="radio" name="attendingStatus" value="accept" checked class="text-custom-primary focus:ring-custom-primary" onchange="togglePlusOneOption(true)">
+                            <span class="ml-3 text-sm font-medium text-gray-800">Joyfully Accepts</span>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-sage-600 transition bg-gray-50/50">
+                            <input type="radio" name="attendingStatus" value="decline" class="text-custom-primary focus:ring-custom-primary" onchange="togglePlusOneOption(false)">
+                            <span class="ml-3 text-sm font-medium text-gray-800">Regretfully Declines</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="attendingFields" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="guestCount">Total Guests (Including You)</label>
+                            <select id="guestCount" name="guestCount" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-600/50 text-sm bg-white">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 Persons (+1 Plus One)</option>
+                                <option value="3">3 Persons</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="mealPreference">Meal / Dietary Requirement</label>
+                            <select id="mealPreference" name="mealPreference" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-600/50 text-sm bg-white">
+                                <option value="Standard Seafood/Chicken">Standard Island Cuisine</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Gluten-Free">Gluten-Free</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="songRequest">Song Request for the DJ</label>
+                        <input type="text" id="songRequest" name="songRequest" placeholder="Artist - Song Title" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-600/50 text-sm">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-custom-primary hover-bg-custom-primary text-white rounded-xl font-semibold text-sm uppercase tracking-widest transition duration-300 shadow-md">
+                    Submit Response
+                </button>
+            </form>
+
+            <div id="rsvpSuccessMsg" class="hidden mt-6 p-6 bg-sage-50 border border-sage-600/30 rounded-2xl text-center">
+                <i class="fa-solid fa-circle-check text-custom-primary text-3xl mb-2"></i>
+                <h4 class="font-serif text-xl text-gray-900">Response Recorded!</h4>
+                <p id="rsvpSuccessText" class="text-sm text-gray-600 mt-1">Thank you for letting us know.</p>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="font-serif text-lg font-semibold text-gray-900">Submitted Responses</h4>
+                <span id="responseCountBadge" class="text-xs bg-custom-primary text-white px-3 py-1 rounded-full font-medium">0 Guests</span>
+            </div>
+            <div id="guestResponseList" class="space-y-3 max-h-56 overflow-y-auto pr-2">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Photo Gallery Section -->
+    <section id="gallery" class="py-24 bg-sage-50/30 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">Memories</p>
+                <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">Engagement Gallery</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80', 'Engagement Moment')">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80', 'Sunset Walk')">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80', 'Romantic Laughs')">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80', 'The Ring')">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80', 'Beach Getaway')">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-sm cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80', 'Together Forever')">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" alt="Engagement Photo 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-gray-300 focus:outline-none" aria-label="Close image preview">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-full flex flex-col items-center">
+            <img id="lightboxImg" src="" alt="Enlarged gallery photo" class="max-h-[80vh] max-w-full rounded-lg object-contain">
+            <p id="lightboxCaption" class="text-white font-serif mt-4 text-center text-lg"></p>
+        </div>
+    </div>
+
+    <!-- 6. Registry & Gift Information -->
+    <section id="registry" class="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">Gift Registry</p>
+            <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">Where We Are Registered</h2>
+            <p class="text-gray-500 text-sm mt-2 max-w-xl mx-auto">Your presence at our wedding is the greatest gift of all. However, if you wish to celebrate with a gift, we are registered at:</p>
+            <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl text-center border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col items-center justify-between">
+                <div class="mb-6">
+                    <div class="w-16 h-16 rounded-full bg-gold-300/20 text-gold-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                        <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-gray-900 mb-2">Honeyfund</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Contribute towards our dream honeymoon getaway and adventures!
+                    </p>
+                </div>
+                <a href="https://www.honeyfund.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-sage-50 text-custom-primary hover:bg-custom-primary hover:text-white rounded-xl font-semibold text-xs uppercase tracking-wider transition">
+                    Contribute Fund
+                </a>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl text-center border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col items-center justify-between">
+                <div class="mb-6">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-custom-primary flex items-center justify-center text-2xl mx-auto mb-4">
+                        <i class="fa-solid fa-house-chimney-window"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-gray-900 mb-2">Zola Registry</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        A curated selection of home essentials, kitchenware, and decor.
+                    </p>
+                </div>
+                <a href="https://www.zola.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-sage-50 text-custom-primary hover:bg-custom-primary hover:text-white rounded-xl font-semibold text-xs uppercase tracking-wider transition">
+                    View Registry
+                </a>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl text-center border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col items-center justify-between">
+                <div class="mb-6">
+                    <div class="w-16 h-16 rounded-full bg-blush-100 text-blush-500 flex items-center justify-center text-2xl mx-auto mb-4">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-gray-900 mb-2">Target & Amazon</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Browse our favorite household upgrades and travel registry items.
+                    </p>
+                </div>
+                <a href="https://www.amazon.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-sage-50 text-custom-primary hover:bg-custom-primary hover:text-white rounded-xl font-semibold text-xs uppercase tracking-wider transition">
+                    View Registry
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Q&A / FAQs Section -->
+    <section id="faq" class="py-24 bg-sage-50/40 px-4 sm:px-6 lg:px-8 border-t border-sage-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="font-cursive text-3xl sm:text-4xl text-custom-primary mb-2">Questions?</p>
+                <h2 class="font-serif text-3xl sm:text-4xl text-gray-900 uppercase tracking-widest">Frequently Asked Questions</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                    <button onclick="toggleAccordion(this)" aria-expanded="false" class="w-full px-6 py-5 text-left font-serif text-lg font-medium text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>What is the dress code?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-50 pt-3">
+                        The dress code is Tropical Formal / Cocktail Attire. Gentlemen are encouraged to wear suit pants with jackets or blazers, and ladies may wear cocktail dresses or elegant formal gowns.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                    <button onclick="toggleAccordion(this)" aria-expanded="false" class="w-full px-6 py-5 text-left font-serif text-lg font-medium text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Are children allowed?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-50 pt-3">
+                        While we love your little ones, our celebration will be an adults-only event with the exception of immediate family members in the wedding party.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                    <button onclick="toggleAccordion(this)" aria-expanded="false" class="w-full px-6 py-5 text-left font-serif text-lg font-medium text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Are there hotel room blocks available?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-50 pt-3">
+                        Yes! Room blocks are available at the resort nearby under "Emma & Michael Wedding". Please book by April 15th to guarantee room block discounts.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                    <button onclick="toggleAccordion(this)" aria-expanded="false" class="w-full px-6 py-5 text-left font-serif text-lg font-medium text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Is parking provided on site?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-50 pt-3">
+                        Yes, free valet parking is available at the main venue gate for all our attending guests.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-white border-t border-gray-100 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <p id="footerNames" class="font-cursive text-4xl text-custom-primary mb-2">Emma & Michael</p>
+            <p class="text-xs text-gray-400 uppercase tracking-widest mb-6">We Can't Wait To Celebrate With You!</p>
+            <p class="text-xs text-gray-300">&copy; 2027 • Designed with Love</p>
+        </div>
+    </footer>
+
+    <!-- 8. Customization Panel Drawer -->
+    <div id="customizerDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 bg-sage-50 border-b border-sage-100 flex justify-between items-center">
+            <div>
+                <h3 class="font-serif text-lg font-bold text-gray-900">Customizer Panel</h3>
+                <p class="text-xs text-gray-500">Modify details live in real-time!</p>
+            </div>
+            <button onclick="closeCustomizer()" class="text-gray-400 hover:text-gray-700" aria-label="Close customizer">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto flex-1 space-y-6">
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputNames">Couple Names</label>
+                <input type="text" id="inputNames" value="Emma & Michael" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputDate">Wedding Date</label>
+                <input type="date" id="inputDate" value="2027-06-18" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputVenue">Venue Name & City</label>
+                <input type="text" id="inputVenue" value="Bahamas Beach Weddings, Freeport" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputAddress">Full Address</label>
+                <input type="text" id="inputAddress" value="8 Merport Building, Freeport, Grand Bahama Island" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputMapUrl">Google Maps Directions Link</label>
+                <input type="text" id="inputMapUrl" value="https://maps.google.com/?cid=3218568944219575116&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Accent Theme Color</label>
+                <div class="grid grid-cols-4 gap-3">
+                    <button type="button" onclick="setThemeColor('#688268', '#526852')" class="h-10 rounded-lg bg-[#688268] border-2 border-white shadow-sm focus:ring-2 focus:ring-gray-400" title="Sage Green"></button>
+                    <button type="button" onclick="setThemeColor('#d98880', '#c2736b')" class="h-10 rounded-lg bg-[#d98880] border-2 border-white shadow-sm focus:ring-2 focus:ring-gray-400" title="Blush Pink"></button>
+                    <button type="button" onclick="setThemeColor('#aa8c2c', '#8a7021')" class="h-10 rounded-lg bg-[#aa8c2c] border-2 border-white shadow-sm focus:ring-2 focus:ring-gray-400" title="Champagne Gold"></button>
+                    <button type="button" onclick="setThemeColor('#2c3e50', '#1a252f')" class="h-10 rounded-lg bg-[#2c3e50] border-2 border-white shadow-sm focus:ring-2 focus:ring-gray-400" title="Navy Blue"></button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2" for="inputHeroBg">Hero Header Image URL</label>
+                <input type="text" id="inputHeroBg" value="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-sage-600">
+            </div>
+        </div>
+
+        <div class="p-6 bg-gray-50 border-t border-gray-100 flex gap-3">
+            <button onclick="applyCustomization()" class="flex-1 py-3 bg-custom-primary hover-bg-custom-primary text-white rounded-xl text-xs font-semibold uppercase tracking-wider transition">
+                Apply Changes
+            </button>
+            <button onclick="closeCustomizer()" class="px-4 py-3 bg-gray-200 text-gray-700 rounded-xl text-xs font-semibold uppercase tracking-wider hover:bg-gray-300 transition">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let targetDate = new Date("2027-06-18T16:00:00").getTime();
+        const STORAGE_KEY = 'wedding_website_rsvps';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStoredRSVPs();
+            updateCountdown();
+        });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        function toggleMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("timerDays").innerText = "00";
+                document.getElementById("timerHours").innerText = "00";
+                document.getElementById("timerMinutes").innerText = "00";
+                document.getElementById("timerSeconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timerDays").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("timerHours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("timerMinutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("timerSeconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        function togglePlusOneOption(isAttending) {
+            const fields = document.getElementById('attendingFields');
+            if (isAttending) {
+                fields.classList.remove('opacity-50', 'pointer-events-none');
+            } else {
+                fields.classList.add('opacity-50', 'pointer-events-none');
+            }
+        }
+
+        function handleRSVPSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const email = document.getElementById('guestEmail').value;
+            const attending = document.querySelector('input[name="attendingStatus"]:checked').value === 'accept';
+            const count = parseInt(document.getElementById('guestCount').value) || 1;
+            const meal = document.getElementById('mealPreference').value;
+            const song = document.getElementById('songRequest').value;
+
+            const responseObj = {
+                id: Date.now(),
+                name,
+                email,
+                attending,
+                count: attending ? count : 0,
+                meal,
+                song,
+                date: new Date().toLocaleDateString()
+            };
+
+            saveRSVPToStorage(responseObj);
+
+            const msgBox = document.getElementById('rsvpSuccessMsg');
+            const msgText = document.getElementById('rsvpSuccessText');
+            msgBox.classList.remove('hidden');
+
+            if (attending) {
+                msgText.innerText = `Thank you, ${name}! We can't wait to celebrate with your party of ${count}!`;
+            } else {
+                msgText.innerText = `Thank you for letting us know, ${name}. You will be dearly missed!`;
+            }
+
+            loadStoredRSVPs();
+            document.getElementById('rsvpForm').reset();
+        }
+
+        function saveRSVPToStorage(data) {
+            const current = getStoredRSVPs();
+            current.unshift(data);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+        }
+
+        function getStoredRSVPs() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) {
+                return [
+                    { id: 1, name: 'Sarah Jenkins', attending: true, count: 2, meal: 'Standard Seafood/Chicken', song: 'Perfect - Ed Sheeran' },
+                    { id: 2, name: 'David & Amanda Miller', attending: true, count: 2, meal: 'Vegetarian', song: 'At Last - Etta James' },
+                    { id: 3, name: 'Julian Hayes', attending: false, count: 0, meal: '-', song: '-' }
+                ];
+            }
+            try {
+                return JSON.parse(raw);
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function loadStoredRSVPs() {
+            const list = getStoredRSVPs();
+            const guestListEl = document.getElementById('guestResponseList');
+            guestListEl.innerHTML = '';
+
+            let totalAttendingGuests = 0;
+
+            list.forEach(item => {
+                if (item.attending) totalAttendingGuests += item.count;
+
+                const card = document.createElement('div');
+                card.className = 'p-3 bg-white rounded-xl border border-gray-100 text-xs flex justify-between items-center';
+                card.innerHTML = `
+                    <div>
+                        <span class="font-semibold text-gray-800">${item.name}</span>
+                        <span class="text-gray-400 ml-2">• ${item.attending ? `${item.count} Guest(s)` : 'Declined'}</span>
+                        ${item.song && item.song !== '-' ? `<p class="text-[11px] text-gray-500 italic mt-0.5"><i class="fa-solid fa-music mr-1"></i>${item.song}</p>` : ''}
+                    </div>
+                    <span class="px-2 py-0.5 ${item.attending ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'} rounded-md font-medium">
+                        ${item.attending ? 'Attending' : 'Declined'}
+                    </span>
+                `;
+                guestListEl.appendChild(card);
+            });
+
+            document.getElementById('responseCountBadge').innerText = `${totalAttendingGuests} Confirmed Guests`;
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            const expanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', String(!expanded));
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function openLightbox(imgSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = caption;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        function openCustomizer() {
+            document.getElementById('customizerDrawer').classList.remove('translate-x-full');
+        }
+
+        function closeCustomizer() {
+            document.getElementById('customizerDrawer').classList.add('translate-x-full');
+        }
+
+        function setThemeColor(primary, hover) {
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--primary-hover', hover);
+        }
+
+        function applyCustomization() {
+            const names = document.getElementById('inputNames').value;
+            const dateVal = document.getElementById('inputDate').value;
+            const venue = document.getElementById('inputVenue').value;
+            const address = document.getElementById('inputAddress').value;
+            const mapUrl = document.getElementById('inputMapUrl').value;
+            const heroBg = document.getElementById('inputHeroBg').value;
+
+            if (names) {
+                document.getElementById('displayCoupleNames').innerText = names;
+                document.getElementById('footerNames').innerText = names;
+                const parts = names.split('&');
+                if (parts.length === 2) {
+                    document.getElementById('navLogo').innerText = `${parts[0].trim()[0]} & ${parts[1].trim()[0]}`;
+                } else {
+                    document.getElementById('navLogo').innerText = names;
+                }
+            }
+
+            if (dateVal) {
+                const parsedDate = new Date(dateVal + "T16:00:00");
+                targetDate = parsedDate.getTime();
+                const options = { month: 'long', day: 'numeric', year: 'numeric' };
+                const formattedDate = parsedDate.toLocaleDateString('en-US', options);
+                document.getElementById('displayVenue').innerText = `${formattedDate} • ${venue}`;
+            }
+
+            if (address) {
+                document.getElementById('displayAddress').innerText = address;
+            }
+            if (mapUrl) {
+                document.getElementById('displayDirectionsBtn').href = mapUrl;
+            }
+            if (heroBg) {
+                document.getElementById('heroBg').style.backgroundImage = `url('${heroBg}')`;
+            }
+
+            updateCountdown();
+            closeCustomizer();
+        }
+    </script>
+</body>
+</html>

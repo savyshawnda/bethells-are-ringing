@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Wedding monogram favicon">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#688268"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#faf8f5"/>
+  <path d="M19 38c0-10.5 7.5-18 16-18 8.5 0 16 7.5 16 18 0 8.8-7.2 16-16 16-8.8 0-16-7.2-16-16Zm15.8 0L26 22h12.3L49 38h-11.2l-1.6-7.3h-1.4L33.2 38H34.8Zm3.3-6.6 1.2-5.6 1.2 5.6h-2.4Z" fill="url(#g)"/>
+  <path d="M16 18h12v4H16zm20 0h12v4H36z" fill="#688268" opacity="0.8"/>
+</svg>
